@@ -23,7 +23,7 @@ async function processArticleWithAI(articleText, prompt) {
         Authorization: `Bearer KEYYYYYYYYYYYYYYYYYYYYYYYYYYAPI`, // Zamień na swój klucz API
       },
       body: JSON.stringify({
-        model: "gpt-3.5-turbo", // Używamy modelu gpt-3.5-turbo
+        model: "gpt-3.5-turbo",
         messages: [
           {
             role: "system",
@@ -31,17 +31,17 @@ async function processArticleWithAI(articleText, prompt) {
           },
           { role: "user", content: `${prompt}\n\n${articleText}` },
         ],
-        max_tokens: 2048, // Ustawiamy maksymalną liczbę tokenów
+        max_tokens: 2048,
       }),
     });
 
     // Pobieramy odpowiedź z API
     const data = await response.json();
-    console.log("Odpowiedź od API:", data); // Wyświetlamy całą odpowiedź dla diagnostyki
+    console.log("Odpowiedź od API:", data);
 
     // Sprawdzamy czy odpowiedź jest poprawna
     if (data.choices && data.choices[0].message) {
-      return data.choices[0].message.content; // Zwracamy wygenerowany HTML
+      return data.choices[0].message.content;
     } else {
       throw new Error(
         "Nieprawidłowa struktura odpowiedzi od API lub brak tekstu."
